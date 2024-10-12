@@ -24,6 +24,17 @@ const ChallengesInterests = z.object({
   interest: z.string().min(2).max(50),
 });
 
+const questionMap = {
+  challenges:
+    "What challenges have you faced in working toward your career goals?",
+  growth:
+    "What areas of personal or professional growth are you currently focusing on?",
+  expansion:
+    "Are you open to exploring career paths outside your main area of study?",
+  interest:
+    "What specific aspects of your field of study interest you the most?",
+};
+
 const FormStep3 = () => {
   const form = useForm<z.infer<typeof ChallengesInterests>>({
     resolver: zodResolver(ChallengesInterests),
@@ -33,6 +44,15 @@ const FormStep3 = () => {
   const multiStepForm = useMultiStepFormContext();
 
   const onSubmit = (data: z.infer<typeof ChallengesInterests>) => {
+    const result = Object.keys(data).reduce((acc, key) => {
+      if (questionMap[key as keyof typeof questionMap]) {
+        acc[questionMap[key as keyof typeof questionMap]] =
+          data[key as keyof typeof data];
+      }
+      return acc;
+    }, {} as Record<string, string>);
+
+    const jsonData = JSON.stringify(result);
     multiStepForm.nextStep();
   };
 

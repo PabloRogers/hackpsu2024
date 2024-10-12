@@ -33,7 +33,26 @@ const FormStep1 = () => {
     defaultValues: {},
   });
 
+  const questionMap = {
+    currentEducation: "What is your current educational background?",
+    currentFieldOfStudy:
+      "What field of study are you currently pursuing or interested in?",
+    yearOfProgram: "What year are you in your current program?",
+    careerGoals: "Do you have any specific career goals in mind?",
+    careerAspirations: "What are your long-term career aspirations?",
+  };
+
   const onSubmit = (data: z.infer<typeof EducationalSchema>) => {
+    // Create a new object that maps questions to their corresponding answers
+    const result = Object.keys(data).reduce((acc, key) => {
+      if (questionMap[key as keyof typeof questionMap]) {
+        acc[questionMap[key as keyof typeof questionMap]] =
+          data[key as keyof typeof data];
+      }
+      return acc;
+    }, {} as Record<string, string>);
+
+    const jsonData = JSON.stringify(result);
     multiStepForm.nextStep();
   };
 

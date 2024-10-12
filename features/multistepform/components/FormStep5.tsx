@@ -23,6 +23,13 @@ const PersonalPreferences = z.object({
   worklife: z.string().min(2).max(50),
 });
 
+const questionMap = {
+  environment: "What type of work environment do you prefer?",
+  teams:
+    "Do you enjoy working in teams, or do you prefer to work independently?",
+  worklife: "What is important to you when it comes to work-life balance?",
+};
+
 const FormStep5 = () => {
   const form = useForm<z.infer<typeof PersonalPreferences>>({
     resolver: zodResolver(PersonalPreferences),
@@ -32,6 +39,15 @@ const FormStep5 = () => {
   const multiStepForm = useMultiStepFormContext();
 
   const onSubmit = (data: z.infer<typeof PersonalPreferences>) => {
+    const result = Object.keys(data).reduce((acc, key) => {
+      if (questionMap[key as keyof typeof questionMap]) {
+        acc[questionMap[key as keyof typeof questionMap]] =
+          data[key as keyof typeof data];
+      }
+      return acc;
+    }, {} as Record<string, string>);
+
+    const jsonData = JSON.stringify(result);
     multiStepForm.nextStep();
   };
 
@@ -101,7 +117,7 @@ const FormStep5 = () => {
             )}
           />
 
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Results</Button>
         </form>
       </Form>
     </FormWrapper>

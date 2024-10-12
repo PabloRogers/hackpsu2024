@@ -25,6 +25,16 @@ const PlanningResources = z.object({
   time: z.string().min(2).max(50),
 });
 
+const questionMap = {
+  goals: "How do you currently plan or set goals for your career development?",
+  platforms: "What career development tools or platforms have you used before?",
+  resources:
+    "What resources have you found helpful in advancing your career so far?",
+  mentors:
+    "Do you have any mentors or individuals guiding you in your career development?",
+  time: "When do you hope to achieve your short-term career goals?",
+};
+
 const FormStep4 = () => {
   const form = useForm<z.infer<typeof PlanningResources>>({
     resolver: zodResolver(PlanningResources),
@@ -34,6 +44,15 @@ const FormStep4 = () => {
   const multiStepForm = useMultiStepFormContext();
 
   const onSubmit = (data: z.infer<typeof PlanningResources>) => {
+    const result = Object.keys(data).reduce((acc, key) => {
+      if (questionMap[key as keyof typeof questionMap]) {
+        acc[questionMap[key as keyof typeof questionMap]] =
+          data[key as keyof typeof data];
+      }
+      return acc;
+    }, {} as Record<string, string>);
+
+    const jsonData = JSON.stringify(result);
     multiStepForm.nextStep();
   };
 

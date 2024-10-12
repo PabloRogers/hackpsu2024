@@ -24,10 +24,29 @@ const SkillsExperience = z.object({
   communities: z.string().min(2).max(50),
 });
 
+const questionMap = {
+  skills: "What skills have you developed so far?",
+  workExperience:
+    "Have you completed any internships, part-time jobs, or volunteer experiences related to your field?",
+  qualifications:
+    "Are there specific certifications, courses, or qualifications you want to pursue?",
+  communities:
+    "Are you involved in any professional networks, communities, or student organizations?",
+};
+
 const FormStep2 = () => {
   const multiStepForm = useMultiStepFormContext();
 
   const onSubmit = (data: z.infer<typeof SkillsExperience>) => {
+    const result = Object.keys(data).reduce((acc, key) => {
+      if (questionMap[key as keyof typeof questionMap]) {
+        acc[questionMap[key as keyof typeof questionMap]] =
+          data[key as keyof typeof data];
+      }
+      return acc;
+    }, {} as Record<string, string>);
+
+    const jsonData = JSON.stringify(result);
     multiStepForm.nextStep();
   };
 
