@@ -26,18 +26,19 @@ const EducationalSchema = z.object({
 const onSubmit = (data: z.infer<typeof EducationalSchema>) => {};
 
 const FormStep1 = () => {
-  const form = useForm<typeof EducationalSchema>({
+  const form = useForm<z.infer<typeof EducationalSchema>>({
     resolver: zodResolver(EducationalSchema),
+    defaultValues: {},
   });
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit((data) => onSubmit(data)))} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="currentEducation"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Current Education</FormLabel>
+              <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input placeholder="shadcn" {...field} />
               </FormControl>
