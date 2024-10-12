@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import FormWrapper from "./FormWrapper";
 
 const EducationalSchema = z.object({
   currentEducation: z.string().min(2).max(50),
@@ -31,27 +32,110 @@ const FormStep1 = () => {
     defaultValues: {},
   });
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="currentEducation"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+    <FormWrapper>
+      <h1 className="pb-4">Educational Background</h1>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="currentEducation"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  What is your current educational background?
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="High school, undergraduate, graduate, etc."
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="currentFieldOfStudy"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  What field of study are you currently pursuing or interested
+                  in?
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g., Computer Science, Business, Engineering, etc.)"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="currentFieldOfStudy"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  What year are you in your current program?
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g., Freshman, Sophomore, etc."
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="currentFieldOfStudy"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Do you have any specific career goals in mind?
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g., Software Engineer, Data Scientist, etc."
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="currentFieldOfStudy"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  What are your long-term career aspirations?
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g., CEO, researcher, entrepreneur, etc."
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Next</Button>
+        </form>
+      </Form>
+    </FormWrapper>
   );
 };
 
