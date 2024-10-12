@@ -5,8 +5,9 @@ import FormStep1 from "./components/FormStep1";
 import { MultiStepFormContext } from "./context";
 import FormStep2 from "./components/FormStep2";
 import FormStepWrapper from "./components/FormStepWrapper";
+import FormStep3 from "./components/FormStep3";
 
-const steps = [<FormStep1 />, <FormStep2 />, <div>FormStep 3</div>];
+const steps = [<FormStep1 />, <FormStep2 />, <FormStep3 />];
 const names = ["Educational Background", "Step 2", "Step 3"];
 
 const MultiStepForm = () => {
