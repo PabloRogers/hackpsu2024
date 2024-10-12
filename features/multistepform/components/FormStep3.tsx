@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import FormWrapper from "./FormWrapper";
+import { Textarea } from "@/components/ui/textarea";
+import { useMultiStepFormContext } from "../context";
 
 const ChallengesInterests = z.object({
   challenges: z.string().min(2).max(50),
@@ -28,11 +30,17 @@ const FormStep3 = () => {
     defaultValues: {},
   });
 
-  const onSubmit = (data: z.infer<typeof ChallengesInterests>) => {};
+  const multiStepForm = useMultiStepFormContext();
+
+  const onSubmit = (data: z.infer<typeof ChallengesInterests>) => {
+    multiStepForm.nextStep();
+  };
 
   return (
     <FormWrapper>
-      <h1 className="pb-4">Skills & Experience</h1>
+      <h1 className="pb-4 text-3xl font-bold text-center text-blue-500">
+        Challenges & Interests
+      </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -45,7 +53,7 @@ const FormStep3 = () => {
                   goals?
                 </FormLabel>
                 <FormControl>
-                  <Input
+                  <Textarea
                     placeholder="e.g., Lack of opportunities, networking, skills development"
                     {...field}
                   />
@@ -65,7 +73,7 @@ const FormStep3 = () => {
                   currently focusing on?
                 </FormLabel>
                 <FormControl>
-                  <Input
+                  <Textarea
                     placeholder="e.g., Leadership, technical skills, time management"
                     {...field}
                   />
@@ -85,7 +93,7 @@ const FormStep3 = () => {
                   of study?
                 </FormLabel>
                 <FormControl>
-                  <Input placeholder="Yes / No" {...field} />
+                  <Textarea placeholder="Yes / No" {...field} />
                 </FormControl>
                 <FormDescription></FormDescription>
                 <FormMessage />
@@ -102,7 +110,7 @@ const FormStep3 = () => {
                   most?
                 </FormLabel>
                 <FormControl>
-                  <Input
+                  <Textarea
                     placeholder="e.g., Research, practical application, innovation"
                     {...field}
                   />

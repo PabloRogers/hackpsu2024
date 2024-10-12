@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import FormWrapper from "./FormWrapper";
+import { Textarea } from "@/components/ui/textarea";
+import { useMultiStepFormContext } from "../context";
 
 const EducationalSchema = z.object({
   currentEducation: z.string().min(2).max(50),
@@ -24,16 +26,22 @@ const EducationalSchema = z.object({
   careerAspirations: z.string().min(2).max(50),
 });
 
-const onSubmit = (data: z.infer<typeof EducationalSchema>) => {};
-
 const FormStep1 = () => {
+  const multiStepForm = useMultiStepFormContext();
   const form = useForm<z.infer<typeof EducationalSchema>>({
     resolver: zodResolver(EducationalSchema),
     defaultValues: {},
   });
+
+  const onSubmit = (data: z.infer<typeof EducationalSchema>) => {
+    multiStepForm.nextStep();
+  };
+
   return (
     <FormWrapper>
-      <h1 className="pb-4">Educational Background</h1>
+      <h1 className="pb-4 text-3xl font-bold text-center text-blue-500">
+        Educational Background
+      </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -45,7 +53,7 @@ const FormStep1 = () => {
                   What is your current educational background?
                 </FormLabel>
                 <FormControl>
-                  <Input
+                  <Textarea
                     placeholder="High school, undergraduate, graduate, etc."
                     {...field}
                   />
@@ -65,7 +73,7 @@ const FormStep1 = () => {
                   in?
                 </FormLabel>
                 <FormControl>
-                  <Input
+                  <Textarea
                     placeholder="e.g., Computer Science, Business, Engineering, etc.)"
                     {...field}
                   />
@@ -77,14 +85,14 @@ const FormStep1 = () => {
           />
           <FormField
             control={form.control}
-            name="currentFieldOfStudy"
+            name="yearOfProgram"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
                   What year are you in your current program?
                 </FormLabel>
                 <FormControl>
-                  <Input
+                  <Textarea
                     placeholder="e.g., Freshman, Sophomore, etc."
                     {...field}
                   />
@@ -96,14 +104,14 @@ const FormStep1 = () => {
           />
           <FormField
             control={form.control}
-            name="currentFieldOfStudy"
+            name="careerGoals"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
                   Do you have any specific career goals in mind?
                 </FormLabel>
                 <FormControl>
-                  <Input
+                  <Textarea
                     placeholder="e.g., Software Engineer, Data Scientist, etc."
                     {...field}
                   />
@@ -115,15 +123,16 @@ const FormStep1 = () => {
           />
           <FormField
             control={form.control}
-            name="currentFieldOfStudy"
+            name="careerAspirations"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
                   What are your long-term career aspirations?
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="e.g., CEO, researcher, entrepreneur, etc."
+                  <Textarea
+                    placeholder="e.g., Executive, Consultant, Freelancer"
+                    className="resize-none"
                     {...field}
                   />
                 </FormControl>

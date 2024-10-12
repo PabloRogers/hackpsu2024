@@ -17,41 +17,42 @@ import FormWrapper from "./FormWrapper";
 import { Textarea } from "@/components/ui/textarea";
 import { useMultiStepFormContext } from "../context";
 
-const SkillsExperience = z.object({
-  skills: z.string().min(2).max(50),
-  workExperience: z.string().min(2).max(50),
-  qualifications: z.string().min(2).max(50),
-  communities: z.string().min(2).max(50),
+const PersonalPreferences = z.object({
+  environment: z.string().min(2).max(50),
+  teams: z.string().min(2).max(50),
+  worklife: z.string().min(2).max(50),
 });
 
-const FormStep2 = () => {
-  const multiStepForm = useMultiStepFormContext();
-
-  const onSubmit = (data: z.infer<typeof SkillsExperience>) => {
-    multiStepForm.nextStep();
-  };
-
-  const form = useForm<z.infer<typeof SkillsExperience>>({
-    resolver: zodResolver(SkillsExperience),
+const FormStep5 = () => {
+  const form = useForm<z.infer<typeof PersonalPreferences>>({
+    resolver: zodResolver(PersonalPreferences),
     defaultValues: {},
   });
+
+  const multiStepForm = useMultiStepFormContext();
+
+  const onSubmit = (data: z.infer<typeof PersonalPreferences>) => {
+    multiStepForm.nextStep();
+  };
 
   return (
     <FormWrapper>
       <h1 className="pb-4 text-3xl font-bold text-center text-blue-500">
-        Skills & Experience
+        Personal Preferences
       </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
             control={form.control}
-            name="skills"
+            name="environment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>What skills have you developed so far?</FormLabel>
+                <FormLabel>
+                  What type of work environment do you prefer?
+                </FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="e.g., Communication, Analytical skills, Project management"
+                    placeholder="e.g., Collaborative, independent, structured, flexible"
                     {...field}
                   />
                 </FormControl>
@@ -62,16 +63,16 @@ const FormStep2 = () => {
           />
           <FormField
             control={form.control}
-            name="workExperience"
+            name="teams"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  Have you completed any internships, part-time jobs, or
-                  volunteer experiences related to your field?
+                  Do you enjoy working in teams, or do you prefer to work
+                  independently?
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="If yes, briefly describe them."
+                    placeholder="If you enjoy working in teams, what type of team dynamic do you prefer?"
                     {...field}
                   />
                 </FormControl>
@@ -82,36 +83,15 @@ const FormStep2 = () => {
           />
           <FormField
             control={form.control}
-            name="qualifications"
+            name="worklife"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  Are there specific certifications, courses, or qualifications
-                  you want to pursue?
+                  What is important to you when it comes to work-life balance?
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="e.g., CPA, TEFL, Six Sigma, etc."
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="communities"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  Are you involved in any professional networks, communities, or
-                  student organizations?
-                </FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="e.g.Future Teachers of America, etc."
+                    placeholder="e.g., Flexible hours, remote work, clearly defined hours"
                     {...field}
                   />
                 </FormControl>
@@ -121,11 +101,11 @@ const FormStep2 = () => {
             )}
           />
 
-          <Button type="submit">Next</Button>
+          <Button type="submit">Submit</Button>
         </form>
       </Form>
     </FormWrapper>
   );
 };
 
-export default FormStep2;
+export default FormStep5;

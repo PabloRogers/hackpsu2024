@@ -5,7 +5,11 @@ interface FormWrapperProps {
 }
 
 const FormWrapper: FC<FormWrapperProps> = ({ children }) => {
-  return <div className="w-2/3">{children}</div>;
+  return (
+    <div className="flex flex-col w-full items-center justify-center">
+      <div className="w-full max-w-md">{children}</div>
+    </div>
+  );
 };
 
 export default FormWrapper;
