@@ -1,5 +1,5 @@
 "use client";
-
+import { Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useChat } from "ai/react";
@@ -22,9 +22,28 @@ export function ChatBot() {
   });
 
   return (
-    <main className="flex flex-col w-full h-screen max-h-dvh bg-background">
-      <header className="p-4 border-b w-full max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold">Chat about our program</h1>
+    <main className="flex flex-col w-full h-screen max-h-dvh bg-gradient-to-r from-purple-900 via-pink-1000 to-blue-800 animate-gradient-x overflow-hidden">
+      <style jsx>{`
+        @keyframes gradient-x {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        .animate-gradient-x {
+          background-size: 400% 400%;
+          animation: gradient-x 70s ease infinite;
+        }
+      `}</style>
+      <header className="p-4 border-b w-full max-w-3xl mx-auto flex justify-center items-center">
+        <h1 className="text-2xl font-bold justify-center text-gray-900">
+          ICSDS Chat Help
+        </h1>
       </header>
 
       <section className="p-4">
@@ -33,14 +52,18 @@ export function ChatBot() {
           className="flex w-full max-w-3xl mx-auto items-center"
         >
           <Input
-            className="flex-1 min-h-[40px]"
+            className="flex-1 min-h-[40px] text-white font-bold"
             placeholder="Type your question here..."
             type="text"
             value={input}
             onChange={handleInputChange}
           />
-          <Button className="ml-2" type="submit">
-            Submit
+          <Button
+            className="ml-2 min-h-[40px] bg-white bg-opacity-20 text-white p-2 rounded-md hover:bg-opacity-30 transition-all backdrop-blur-sm"
+            type="submit"
+            aria-label="Send message"
+          >
+            <Send size={24} />
           </Button>
         </form>
       </section>
