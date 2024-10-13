@@ -12,6 +12,11 @@ import path from "path";
 
 export const dynamic = "force-dynamic";
 
+interface InputType {
+  context: string; // replace string with the actual type of context
+  question: string; // replace string with the actual type of question
+}
+
 const formatMessage = (message: VercelChatMessage) => {
   return `${message.role}: ${message.content}`;
 };
@@ -81,10 +86,11 @@ export async function POST(req: Request) {
 
     const IndividualTextPrompt =
       PromptTemplate.fromTemplate(INDIVIDUAL_TEMPLATE);
+
     const IndividualTextChain = RunnableSequence.from([
       {
-        context: (input: any) => input.context,
-        question: (input: any) => input.question,
+        context: (input: InputType) => input.context,
+        question: (input: InputType) => input.question,
       },
       IndividualTextPrompt,
       IndividualModel,
@@ -150,8 +156,15 @@ export async function POST(req: Request) {
     return new StreamingTextResponse(
       stream.pipeThrough(createStreamDataTransformer())
     );
-  } catch (e: any) {
-    console.error("Error in POST request:", e);
-    return Response.json({ error: e.message, stack: e.stack }, { status: 500 });
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      console.error("Error in POST request:", e);
+      return Response.json(
+        { error: e.message, stack: e.stack },
+        { status: 500 }
+      );
+    } else {
+      // Handle the case where e is not an instance of Error
+    }
   }
 }
