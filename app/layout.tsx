@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { BackgroundBeams } from "@/components/ui/background-beams";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
 const geistSans = localFont({
