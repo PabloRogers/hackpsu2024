@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import { Button } from "./ui/button";
 
 const HeroPage = () => {
   return (
@@ -15,9 +14,14 @@ const HeroPage = () => {
       </p>
       <div>
         <Link href="/pathfinder">
-          <Button className="bg-white text-indigo-500 font-bold py-2 px-4 rounded hover:bg-cover-white ">
-            Find Your Path Now
-          </Button>
+          <button className="bg-white text-blue-500 font-bold py-2 px-4 rounded">
+            Career Advisor
+          </button>
+        </Link>
+        <Link href="/ChatBOT">
+          <button className="bg-white text-blue-500 font-bold py-2 px-4 rounded">
+            ICSDS Chatbot
+          </button>
         </Link>
       </div>
     </div>
