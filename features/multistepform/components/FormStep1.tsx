@@ -110,7 +110,7 @@ const FormStep1 = () => {
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="e.g., Computer Science, Business, Engineering, etc.)"
+                    placeholder="e.g., Science, Business, Arts, Engineering"
                     {...field}
                     onChange={(e) => {
                       field.onChange(e);
@@ -136,7 +136,7 @@ const FormStep1 = () => {
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="e.g., Freshman, Sophomore, etc."
+                    placeholder="e.g., First year, final year"
                     {...field}
                     onChange={(e) => {
                       field.onChange(e);
@@ -162,7 +162,7 @@ const FormStep1 = () => {
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="e.g., Software Engineer, Data Scientist, etc."
+                    placeholder="e.g., Doctor, Marketing Specialist, Researcher"
                     {...field}
                     onChange={(e) => {
                       field.onChange(e);
@@ -189,7 +189,6 @@ const FormStep1 = () => {
                 <FormControl>
                   <Textarea
                     placeholder="e.g., Executive, Consultant, Freelancer"
-                    className="resize-none"
                     {...field}
                     onChange={(e) => {
                       field.onChange(e);
