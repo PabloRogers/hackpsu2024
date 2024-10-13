@@ -12,7 +12,7 @@ const HeroPage = () => {
         educational journey. Our personalized guidance from Pathfinder helps you
         navigate your career path with confidence.
       </p>
-      <div>
+      <div className="space-x-4">
         <Link href="/pathfinder">
           <button className="bg-white text-blue-500 font-bold py-2 px-4 rounded">
             Career Advisor
