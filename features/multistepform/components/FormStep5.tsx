@@ -55,7 +55,7 @@ const FormStep5 = () => {
 
   return (
     <FormWrapper>
-      <h1 className="pb-4 text-3xl font-bold text-center text-blue-500">
+      <h1 className="pb-4 text-3xl font-bold text-center text-indigo-500">
         Personal Preferences
       </h1>
       <Form {...form}>
