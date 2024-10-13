@@ -22,7 +22,7 @@ export function ChatBot() {
   });
 
   return (
-    <main className="flex flex-col w-full h-screen max-h-dvh bg-gradient-to-r from-purple-900 via-pink-1000 to-blue-800 animate-gradient-x overflow-hidden">
+    <main className="flex flex-col w-full h-screen max-h-dvh bg-gradient-to-r from-red-900 via-pink-1000 to-blue-800 animate-gradient-x overflow-hidden">
       <style jsx>{`
         @keyframes gradient-x {
           0% {
@@ -37,7 +37,7 @@ export function ChatBot() {
         }
         .animate-gradient-x {
           background-size: 400% 400%;
-          animation: gradient-x 70s ease infinite;
+          animation: gradient-x 60s ease infinite;
         }
       `}</style>
       <header className="p-4 border-b w-full max-w-3xl mx-auto flex justify-center items-center">

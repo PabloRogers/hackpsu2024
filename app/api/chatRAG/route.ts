@@ -29,7 +29,7 @@ Context: {context}
 user: {question}
 assistant:`;
 
-const SUMMARY_TEMPLATE = `Summarize and synthesize the following responses to answer the user's question. Don't mention that there are responses in the background. If there's no relevant information in the responses, state that politely:
+const SUMMARY_TEMPLATE = `Answer the user's question utilising the best information from the responses. DO NOT SPEAK OF THE RESPONSES. If there's no relevant information in the responses, state that politely:
 ==============================
 Individual responses:
 {responses}
