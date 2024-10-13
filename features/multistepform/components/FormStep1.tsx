@@ -20,11 +20,11 @@ import { useMultiStepFormContext } from "../context";
 import { useFormDataStore } from "../context/store";
 
 export const EducationalSchema = z.object({
-  currentEducation: z.string().max(50),
-  currentFieldOfStudy: z.string().max(50),
-  yearOfProgram: z.string().max(50),
-  careerGoals: z.string().max(50),
-  careerAspirations: z.string().max(50),
+  currentEducation: z.string().min(1),
+  currentFieldOfStudy: z.string().min(1),
+  yearOfProgram: z.string().min(1),
+  careerGoals: z.string().min(1),
+  careerAspirations: z.string().min(1),
 });
 
 const FormStep1 = () => {

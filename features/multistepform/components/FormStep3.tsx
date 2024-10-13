@@ -19,10 +19,10 @@ import { useMultiStepFormContext } from "../context";
 import { useFormDataStore } from "../context/store";
 
 export const ChallengesInterests = z.object({
-  challenges: z.string().max(50),
-  growth: z.string().max(50),
-  expansion: z.string().max(50),
-  interest: z.string().max(50),
+  challenges: z.string().min(1),
+  growth: z.string().min(1),
+  expansion: z.string().min(1),
+  interest: z.string().min(1),
 });
 
 const questionMap = {

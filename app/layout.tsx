@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import { EvervaultCard } from "@/components/ui/evervault-card";
+import { Boxes } from "@/components/ui/background-boxes";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,6 +37,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Boxes />
           {children}
         </ThemeProvider>
       </body>

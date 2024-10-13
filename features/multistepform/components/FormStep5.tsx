@@ -20,9 +20,9 @@ import { useFormDataStore } from "../context/store";
 import Link from "next/link";
 
 export const PersonalPreferences = z.object({
-  environment: z.string().max(50),
-  teams: z.string().max(50),
-  worklife: z.string().max(50),
+  environment: z.string().min(1),
+  teams: z.string().min(1),
+  worklife: z.string().min(1),
 });
 
 const questionMap = {
@@ -140,7 +140,9 @@ const FormStep5 = () => {
             )}
           />
 
-          <Button type="submit">Results</Button>
+          <Link href="chat">
+            <Button type="submit">Results</Button>
+          </Link>
         </form>
       </Form>
     </FormWrapper>

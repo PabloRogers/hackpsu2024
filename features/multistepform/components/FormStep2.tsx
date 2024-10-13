@@ -19,10 +19,10 @@ import { useMultiStepFormContext } from "../context";
 import { useFormDataStore } from "../context/store";
 
 export const SkillsExperience = z.object({
-  skills: z.string().max(50),
-  workExperience: z.string().max(50),
-  qualifications: z.string().max(50),
-  communities: z.string().max(50),
+  skills: z.string().min(1),
+  workExperience: z.string().min(1),
+  qualifications: z.string().min(1),
+  communities: z.string().min(1),
 });
 
 const questionMap = {

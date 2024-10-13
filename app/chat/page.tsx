@@ -1,8 +1,13 @@
+"use client";
 import FormWrapper from "@/features/multistepform/components/FormWrapper";
 import Results from "@/features/multistepform/components/Results";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import OpenAI from "openai";
+import ChatCompletion from "openai";
 
-const page = () => {
+import { useFormDataStore } from "@/features/multistepform/context/store";
+
+const Page = () => {
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <Results />
@@ -10,4 +15,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
