@@ -17,20 +17,30 @@ import { Input } from "@/components/ui/input";
 import FormWrapper from "./FormWrapper";
 import { Textarea } from "@/components/ui/textarea";
 import { useMultiStepFormContext } from "../context";
+import { useFormDataStore } from "../context/store";
 
-const EducationalSchema = z.object({
-  currentEducation: z.string().min(2).max(50),
-  currentFieldOfStudy: z.string().min(2).max(50),
-  yearOfProgram: z.string().min(1).max(50),
-  careerGoals: z.string().min(2).max(50),
-  careerAspirations: z.string().min(2).max(50),
+export const EducationalSchema = z.object({
+  currentEducation: z.string().max(50),
+  currentFieldOfStudy: z.string().max(50),
+  yearOfProgram: z.string().max(50),
+  careerGoals: z.string().max(50),
+  careerAspirations: z.string().max(50),
 });
 
 const FormStep1 = () => {
+  const form1Data = useFormDataStore.getState().Step1Data;
+  const setForm1Data = useFormDataStore.getState().setStep1Data;
   const multiStepForm = useMultiStepFormContext();
+
   const form = useForm<z.infer<typeof EducationalSchema>>({
     resolver: zodResolver(EducationalSchema),
-    defaultValues: {},
+    defaultValues: {
+      currentEducation: form1Data.currentEducation,
+      currentFieldOfStudy: form1Data.currentFieldOfStudy,
+      yearOfProgram: form1Data.yearOfProgram,
+      careerGoals: form1Data.careerGoals,
+      careerAspirations: form1Data.careerAspirations,
+    },
   });
 
   const questionMap = {
@@ -75,6 +85,13 @@ const FormStep1 = () => {
                   <Textarea
                     placeholder="High school, undergraduate, graduate, etc."
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm1Data({
+                        ...form1Data,
+                        currentEducation: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -95,6 +112,13 @@ const FormStep1 = () => {
                   <Textarea
                     placeholder="e.g., Computer Science, Business, Engineering, etc.)"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm1Data({
+                        ...form1Data,
+                        currentFieldOfStudy: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -114,6 +138,13 @@ const FormStep1 = () => {
                   <Textarea
                     placeholder="e.g., Freshman, Sophomore, etc."
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm1Data({
+                        ...form1Data,
+                        yearOfProgram: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -133,6 +164,13 @@ const FormStep1 = () => {
                   <Textarea
                     placeholder="e.g., Software Engineer, Data Scientist, etc."
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm1Data({
+                        ...form1Data,
+                        careerGoals: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -153,6 +191,13 @@ const FormStep1 = () => {
                     placeholder="e.g., Executive, Consultant, Freelancer"
                     className="resize-none"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm1Data({
+                        ...form1Data,
+                        careerAspirations: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>

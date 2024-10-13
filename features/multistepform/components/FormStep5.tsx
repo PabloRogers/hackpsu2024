@@ -16,11 +16,12 @@ import { Input } from "@/components/ui/input";
 import FormWrapper from "./FormWrapper";
 import { Textarea } from "@/components/ui/textarea";
 import { useMultiStepFormContext } from "../context";
+import { useFormDataStore } from "../context/store";
 
-const PersonalPreferences = z.object({
-  environment: z.string().min(2).max(50),
-  teams: z.string().min(2).max(50),
-  worklife: z.string().min(2).max(50),
+export const PersonalPreferences = z.object({
+  environment: z.string().max(50),
+  teams: z.string().max(50),
+  worklife: z.string().max(50),
 });
 
 const questionMap = {
@@ -31,24 +32,22 @@ const questionMap = {
 };
 
 const FormStep5 = () => {
+  const form5Data = useFormDataStore.getState().Step5Data;
+  const setForm5Data = useFormDataStore.getState().setStep5Data;
+  const formDataStore = useFormDataStore();
+
   const form = useForm<z.infer<typeof PersonalPreferences>>({
     resolver: zodResolver(PersonalPreferences),
-    defaultValues: {},
+    defaultValues: {
+      environment: form5Data.environment,
+      teams: form5Data.teams,
+      worklife: form5Data.worklife,
+    },
   });
 
-  const multiStepForm = useMultiStepFormContext();
-
   const onSubmit = (data: z.infer<typeof PersonalPreferences>) => {
-    const result = Object.keys(data).reduce((acc, key) => {
-      if (questionMap[key as keyof typeof questionMap]) {
-        acc[questionMap[key as keyof typeof questionMap]] =
-          data[key as keyof typeof data];
-      }
-      return acc;
-    }, {} as Record<string, string>);
-
-    const jsonData = JSON.stringify(result);
-    multiStepForm.nextStep();
+    const allDataWithQuestions = formDataStore.getAllData();
+    console.log(JSON.stringify(allDataWithQuestions, null, 2));
   };
 
   return (
@@ -70,6 +69,13 @@ const FormStep5 = () => {
                   <Textarea
                     placeholder="e.g., Collaborative, independent, structured, flexible"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm5Data({
+                        ...form5Data,
+                        environment: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -90,6 +96,13 @@ const FormStep5 = () => {
                   <Textarea
                     placeholder="If you enjoy working in teams, what type of team dynamic do you prefer?"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm5Data({
+                        ...form5Data,
+                        teams: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -109,6 +122,13 @@ const FormStep5 = () => {
                   <Textarea
                     placeholder="e.g., Flexible hours, remote work, clearly defined hours"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm5Data({
+                        ...form5Data,
+                        worklife: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>

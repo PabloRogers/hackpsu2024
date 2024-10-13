@@ -16,12 +16,13 @@ import { Input } from "@/components/ui/input";
 import FormWrapper from "./FormWrapper";
 import { Textarea } from "@/components/ui/textarea";
 import { useMultiStepFormContext } from "../context";
+import { useFormDataStore } from "../context/store";
 
-const ChallengesInterests = z.object({
-  challenges: z.string().min(2).max(50),
-  growth: z.string().min(2).max(50),
-  expansion: z.string().min(2).max(50),
-  interest: z.string().min(2).max(50),
+export const ChallengesInterests = z.object({
+  challenges: z.string().max(50),
+  growth: z.string().max(50),
+  expansion: z.string().max(50),
+  interest: z.string().max(50),
 });
 
 const questionMap = {
@@ -36,12 +37,18 @@ const questionMap = {
 };
 
 const FormStep3 = () => {
+  const form3Data = useFormDataStore.getState().Step3Data;
+  const setForm3Data = useFormDataStore.getState().setStep3Data;
+  const multiStepForm = useMultiStepFormContext();
   const form = useForm<z.infer<typeof ChallengesInterests>>({
     resolver: zodResolver(ChallengesInterests),
-    defaultValues: {},
+    defaultValues: {
+      challenges: form3Data.challenges,
+      growth: form3Data.growth,
+      expansion: form3Data.expansion,
+      interest: form3Data.interest,
+    },
   });
-
-  const multiStepForm = useMultiStepFormContext();
 
   const onSubmit = (data: z.infer<typeof ChallengesInterests>) => {
     const result = Object.keys(data).reduce((acc, key) => {
@@ -76,6 +83,13 @@ const FormStep3 = () => {
                   <Textarea
                     placeholder="e.g., Lack of opportunities, networking, skills development"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm3Data({
+                        ...form3Data,
+                        challenges: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -96,6 +110,13 @@ const FormStep3 = () => {
                   <Textarea
                     placeholder="e.g., Leadership, technical skills, time management"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm3Data({
+                        ...form3Data,
+                        growth: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -113,7 +134,17 @@ const FormStep3 = () => {
                   of study?
                 </FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Yes / No" {...field} />
+                  <Textarea
+                    placeholder="Yes / No"
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm3Data({
+                        ...form3Data,
+                        expansion: e.target.value,
+                      });
+                    }}
+                  />
                 </FormControl>
                 <FormDescription></FormDescription>
                 <FormMessage />
@@ -133,6 +164,13 @@ const FormStep3 = () => {
                   <Textarea
                     placeholder="e.g., Research, practical application, innovation"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm3Data({
+                        ...form3Data,
+                        interest: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>

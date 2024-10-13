@@ -16,13 +16,14 @@ import { Input } from "@/components/ui/input";
 import FormWrapper from "./FormWrapper";
 import { Textarea } from "@/components/ui/textarea";
 import { useMultiStepFormContext } from "../context";
+import { useFormDataStore } from "../context/store";
 
-const PlanningResources = z.object({
-  goals: z.string().min(2).max(50),
-  platforms: z.string().min(2).max(50),
-  resources: z.string().min(2).max(50),
-  mentors: z.string().min(2).max(50),
-  time: z.string().min(2).max(50),
+export const PlanningResources = z.object({
+  goals: z.string().max(50),
+  platforms: z.string().max(50),
+  resources: z.string().max(50),
+  mentors: z.string().max(50),
+  time: z.string().max(50),
 });
 
 const questionMap = {
@@ -36,12 +37,19 @@ const questionMap = {
 };
 
 const FormStep4 = () => {
+  const form4Data = useFormDataStore.getState().Step4Data;
+  const setForm4Data = useFormDataStore.getState().setStep4Data;
+  const multiStepForm = useMultiStepFormContext();
   const form = useForm<z.infer<typeof PlanningResources>>({
     resolver: zodResolver(PlanningResources),
-    defaultValues: {},
+    defaultValues: {
+      goals: form4Data.goals,
+      platforms: form4Data.platforms,
+      resources: form4Data.resources,
+      mentors: form4Data.mentors,
+      time: form4Data.time,
+    },
   });
-
-  const multiStepForm = useMultiStepFormContext();
 
   const onSubmit = (data: z.infer<typeof PlanningResources>) => {
     const result = Object.keys(data).reduce((acc, key) => {
@@ -96,6 +104,13 @@ const FormStep4 = () => {
                   <Textarea
                     placeholder="e.g., LinkedIn, Coursera, career counseling services"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm4Data({
+                        ...form4Data,
+                        platforms: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -116,6 +131,13 @@ const FormStep4 = () => {
                   <Textarea
                     placeholder="e.g., online courses, mentors, professional organizations"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm4Data({
+                        ...form4Data,
+                        resources: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -136,6 +158,13 @@ const FormStep4 = () => {
                   <Textarea
                     placeholder="If yes, briefly describe them."
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm4Data({
+                        ...form4Data,
+                        mentors: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -155,6 +184,13 @@ const FormStep4 = () => {
                   <Textarea
                     placeholder="e.g., within 1 year, after graduation"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm4Data({
+                        ...form4Data,
+                        time: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>

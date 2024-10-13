@@ -16,12 +16,13 @@ import { Input } from "@/components/ui/input";
 import FormWrapper from "./FormWrapper";
 import { Textarea } from "@/components/ui/textarea";
 import { useMultiStepFormContext } from "../context";
+import { useFormDataStore } from "../context/store";
 
-const SkillsExperience = z.object({
-  skills: z.string().min(2).max(50),
-  workExperience: z.string().min(2).max(50),
-  qualifications: z.string().min(2).max(50),
-  communities: z.string().min(2).max(50),
+export const SkillsExperience = z.object({
+  skills: z.string().max(50),
+  workExperience: z.string().max(50),
+  qualifications: z.string().max(50),
+  communities: z.string().max(50),
 });
 
 const questionMap = {
@@ -36,6 +37,8 @@ const questionMap = {
 
 const FormStep2 = () => {
   const multiStepForm = useMultiStepFormContext();
+  const form2Data = useFormDataStore.getState().Step2Data;
+  const setForm2Data = useFormDataStore.getState().setStep2Data;
 
   const onSubmit = (data: z.infer<typeof SkillsExperience>) => {
     const result = Object.keys(data).reduce((acc, key) => {
@@ -52,7 +55,12 @@ const FormStep2 = () => {
 
   const form = useForm<z.infer<typeof SkillsExperience>>({
     resolver: zodResolver(SkillsExperience),
-    defaultValues: {},
+    defaultValues: {
+      skills: form2Data.skills,
+      workExperience: form2Data.workExperience,
+      qualifications: form2Data.qualifications,
+      communities: form2Data.communities,
+    },
   });
 
   return (
@@ -72,6 +80,13 @@ const FormStep2 = () => {
                   <Textarea
                     placeholder="e.g., Communication, Analytical skills, Project management"
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm2Data({
+                        ...form2Data,
+                        skills: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -92,6 +107,13 @@ const FormStep2 = () => {
                   <Textarea
                     placeholder="If yes, briefly describe them."
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm2Data({
+                        ...form2Data,
+                        workExperience: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -112,6 +134,13 @@ const FormStep2 = () => {
                   <Textarea
                     placeholder="e.g., CPA, TEFL, Six Sigma, etc."
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm2Data({
+                        ...form2Data,
+                        qualifications: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
@@ -132,6 +161,13 @@ const FormStep2 = () => {
                   <Textarea
                     placeholder="e.g.Future Teachers of America, etc."
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setForm2Data({
+                        ...form2Data,
+                        communities: e.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
                 <FormDescription></FormDescription>
