@@ -2,6 +2,36 @@
 
 Pathfinder is an AI-powered platform that combines career guidance with advanced document summarization capabilities. It aims to provide accurate and reliable information to users, leveraging the power of AI without compromising on data integrity.
 
+# Getting Started
+
+Find it live at: [Pathfinder](https://hackpsu2024.vercel.app/)
+
+Follow these steps to set up Pathfinder on your local machine:
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/your-username/pathfinder.git
+   cd pathfinder
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Create a `.env.local` file in the root directory and add your API key:
+   ```
+   NEXT_PUBLIC_API_KEY=your_api_key_here
+   ```
+
+4. Start the development server:
+   ```
+   npm run dev
+   ```
+
+5. Open your browser and navigate to `http://localhost:3000` to see Pathfinder in action!
+
+
 ## ✨ Inspiration
 
 Pathfinder was born from the concept of an "Advisor at Your Hands." Our goal was to create an AI chatbot that offers:
