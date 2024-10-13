@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pathfinder 🧭
 
-## Getting Started
+Pathfinder is an AI-powered platform that combines career guidance with advanced document summarization capabilities. It aims to provide accurate and reliable information to users, leveraging the power of AI without compromising on data integrity.
 
-First, run the development server:
+## ✨ Inspiration
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Pathfinder was born from the concept of an "Advisor at Your Hands." Our goal was to create an AI chatbot that offers:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Accurate and reliable career guidance
+- Promotion of Penn State Smeal College of Business programs
+- Trustworthy information processing without "hallucination"
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🤖 What it does
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Pathfinder offers two key functionalities:
 
-## Learn More
+1. **Career Guidance Chatbot**: 
+   - Explores different career paths
+   - Provides personalized advice
+   - Offers insights based on individual interests and skills
+   - Promotes Penn State Smeal programs
 
-To learn more about Next.js, take a look at the following resources:
+2. **RAG Bot for ICDS**: 
+   - Utilizes Retrieval-Augmented Generation
+   - Summarizes complex documents
+   - Provides accurate responses based on user guides or documentation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ How we built it
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Frontend: Next.js for a dynamic and user-friendly interface
+- Backend: Langchain for sophisticated natural language processing and RAG capabilities
+- Data Pipelines:
+  - Career Advisor: Pulls data from curated internet sources and Smeal program details
+  - RAG for ICDS: Multi-step process for retrieving, summarizing, and synthesizing information
 
-## Deploy on Vercel
+## 🚧 Challenges we ran into
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Initial difficulties with Langchain implementation
+- Integrating RAG for effective summarization while maintaining context
+- Managing token limitations
+- Linking frontend and backend due to deprecated libraries and version inconsistencies
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🏆 Accomplishments that we're proud of
+
+- Developed a dual-purpose AI chatbot with high accuracy and reliability
+- Successfully implemented RAG techniques for complex document summarization
+- Received positive feedback on user-friendliness and value
+
+## 📚 What we learned
+
+- Developing AI systems focused on data integrity and user trust
+- Implementing RAG techniques for information retrieval and summarization
+- Creating scalable AI-driven web applications with Next.js and Langchain
+- The importance of iterative, user-centered development
+
+## 🚀 What's next for Pathfinder
+
+- Expand data sources for career guidance
+- Enhance RAG bot's summarization techniques
+- Introduce real-time updates to the knowledge base
+- Explore machine learning models for more personalized recommendations
+- Implement a web scraper for improved user convenience and data integration
+
+Pathfinder aims to become a trusted resource for career advice and data insights, supporting the educational missions of Penn State Smeal and ICDS.
