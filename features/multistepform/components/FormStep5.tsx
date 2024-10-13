@@ -17,6 +17,7 @@ import FormWrapper from "./FormWrapper";
 import { Textarea } from "@/components/ui/textarea";
 import { useMultiStepFormContext } from "../context";
 import { useFormDataStore } from "../context/store";
+import Link from "next/link";
 
 export const PersonalPreferences = z.object({
   environment: z.string().max(50),
@@ -35,6 +36,7 @@ const FormStep5 = () => {
   const form5Data = useFormDataStore.getState().Step5Data;
   const setForm5Data = useFormDataStore.getState().setStep5Data;
   const formDataStore = useFormDataStore();
+  const allDataWithQuestions = formDataStore.getAllData();
 
   const form = useForm<z.infer<typeof PersonalPreferences>>({
     resolver: zodResolver(PersonalPreferences),
@@ -47,7 +49,8 @@ const FormStep5 = () => {
 
   const onSubmit = (data: z.infer<typeof PersonalPreferences>) => {
     const allDataWithQuestions = formDataStore.getAllData();
-    console.log(JSON.stringify(allDataWithQuestions, null, 2));
+    let json = JSON.stringify(allDataWithQuestions, null, 2);
+    localStorage.setItem("formData", json);
   };
 
   return (
