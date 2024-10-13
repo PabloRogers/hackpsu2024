@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useFormDataStore } from "../context/store";
 import { ChatCompletion } from "openai/resources/index.mjs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 
 const Results = () => {
   const formData = useFormDataStore.getState();
@@ -33,23 +34,25 @@ const Results = () => {
   }, [input]); // This effect runs every time `input` changesSubmit the form
 
   return (
-    <div className="w-5/6  h-[600px] flex flex-col items-center">
-      <h1 className="text-4xl font-bold text-center text-blue-500">
-        Results 🎉
-      </h1>
-      <Card className="w-full h-full p-10">
-        <ScrollArea className="flex items-center justify-center flex-grow w-full h-full">
-          {messages.map(
-            (message) =>
-              message.role === "assistant" && (
-                <div
-                  key={message.id}
-                  dangerouslySetInnerHTML={{ __html: message.content }}
-                />
-              )
-          )}
-        </ScrollArea>
-      </Card>
+    <div className="flex flex-col items-center justify-center h-screen">
+      <div className="h-[10rem] flex items-center justify-center">
+        <TextHoverEffect text="Your Paths" />
+      </div>
+      <div className="w-5/6 h-[600px] min-h-[600px] max-h-[600px] min-w-5/6 flex items-center justify-center">
+        <Card className="w-full h-full p-10 overflow-y-auto">
+          <ScrollArea className="flex items-center justify-center flex-grow w-full h-full">
+            {messages.map(
+              (message) =>
+                message.role === "assistant" && (
+                  <div
+                    key={message.id}
+                    dangerouslySetInnerHTML={{ __html: message.content }}
+                  />
+                )
+            )}
+          </ScrollArea>
+        </Card>
+      </div>
     </div>
   );
 };

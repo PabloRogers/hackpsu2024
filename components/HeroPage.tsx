@@ -1,9 +1,10 @@
 import Link from "next/link";
 import React from "react";
+import { Button } from "./ui/button";
 
 const HeroPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-blue-500 text-white p-4">
+    <div className="flex flex-col items-center justify-center h-screen  text-white p-4">
       <h1 className="text-4xl font-bold mb-4 text-center">
         Unlock Your Career Potential
       </h1>
@@ -14,9 +15,9 @@ const HeroPage = () => {
       </p>
       <div>
         <Link href="/pathfinder">
-          <button className="bg-white text-blue-500 font-bold py-2 px-4 rounded">
+          <Button className="bg-white text-indigo-500 font-bold py-2 px-4 rounded hover:bg-cover-white ">
             Find Your Path Now
-          </button>
+          </Button>
         </Link>
       </div>
     </div>

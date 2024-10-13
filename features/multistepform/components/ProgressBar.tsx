@@ -12,7 +12,7 @@ const ProgressBar = () => {
             <div
               className={`flex-grow rounded h-1 mx-1 transition-all duration-300 ${
                 multiStepForm.currentStepIndex >= i
-                  ? "bg-blue-500"
+                  ? "bg-indigo-500"
                   : "bg-gray-200"
               }`}
             />
@@ -20,9 +20,9 @@ const ProgressBar = () => {
           <div
             className={`relative w-2 h-2 rounded-full transition-all duration-300 border-2 ${
               multiStepForm.currentStepIndex === i
-                ? "bg-blue-500 border-blue-500 scale-110" // Highlight the current step
+                ? "bg-indigo-500 border-indigo-500 scale-110" // Highlight the current step
                 : multiStepForm.currentStepIndex > i
-                ? "bg-blue-500 border-blue-500"
+                ? "bg-blue-500 border-indigo-500"
                 : "bg-gray-200 border-gray-200"
             }`}
           >

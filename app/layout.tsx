@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { EvervaultCard } from "@/components/ui/evervault-card";
-import { Boxes } from "@/components/ui/background-boxes";
+import { BackgroundBeams } from "@/components/ui/background-beams";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,7 +37,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <BackgroundGradientAnimation className="z-0">
+            <div className="relative z-10">{children}</div>
+          </BackgroundGradientAnimation>
         </ThemeProvider>
       </body>
     </html>

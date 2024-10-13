@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import React, { FC } from "react";
 import FormStepHeader from "./FormStepHeader";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 
 interface FormStepWrapperProps {
   children: React.ReactNode;
@@ -10,10 +11,8 @@ interface FormStepWrapperProps {
 const FormStepWrapper: FC<FormStepWrapperProps> = ({ children }) => {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <div className="flex justify-center items-center">
-        <h1 className="text-6xl font-bold text-blue-500 animate-pulse mb-10">
-          Pathfinder
-        </h1>
+      <div className="h-[10rem] flex items-center justify-center">
+        <TextHoverEffect text="PathFinder" />
       </div>
       <Card className="flex flex-col max-w-2xl w-full h-2/3 p-6">
         <FormStepHeader />
