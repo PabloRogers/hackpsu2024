@@ -35,7 +35,7 @@ const Results = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <div className="h-[10rem] flex items-center justify-center">
+      <div className="h-[10rem] flex items-center justify-center text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">
         <TextHoverEffect text="Your Paths" />
       </div>
       <div className="w-5/6 h-[600px] min-h-[600px] max-h-[600px] min-w-5/6 flex items-center justify-center">
